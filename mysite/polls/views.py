@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import Http404, HttpResponse
 from django.template import loader
 
@@ -24,11 +24,13 @@ def index(request):
 
 #demostracion de views y recibir parametros
 def detail(request, question_id):
-    try:
-        question = Question.objects.get(pk=question_id)
-    except Question.DoesNotExist:
-        raise Http404("Question does no exist")
+    question = get_object_or_404(Question, pk=question_id)
     return render(request, "polls/detail.html", {"question": question})
+    #try:
+    #    question = Question.objects.get(pk=question_id)
+    #except Question.DoesNotExist:
+    #    raise Http404("Question does no exist")
+    #return render(request, "polls/detail.html", {"question": question})
     #return HttpResponse("La pregunta es: %s"%question_id)
 
 def results(request, question_id):
