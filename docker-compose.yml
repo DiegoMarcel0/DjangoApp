@@ -1,0 +1,19 @@
+services:
+  django-app:
+    build: ./mysite
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_DB_HOST=db
+    depends_on:
+      - db
+  db:
+    build: ./MySQL
+    container_name: db_djangoapp
+    ports:
+      - "5432:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+volumes:
+  mysql_data:
