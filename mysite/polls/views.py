@@ -84,7 +84,6 @@ def question_form(request):
     else:
         message_error = None
     form = QuestionForm()
-    #form = QuestionForm()
     return render(request, 'polls/question_form.html', {'form':form, 'error_message': message_error})
 
 def choices_form(request):
